@@ -10,3 +10,5 @@ fastapi
 uvicorn
 pydantic
 streamlit-lottie
+python-jose[cryptography]
+passlib[bcrypt]
