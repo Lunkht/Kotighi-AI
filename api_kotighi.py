@@ -287,6 +287,51 @@ def get_historique(current_user: User = Depends(get_current_user), db: Session =
     history = db.query(Historique).filter(Historique.user_id == current_user.id).order_by(Historique.created_at.desc()).limit(20).all()
     return history
 
+# --- CHATBOT IA (FAQ) ---
+class ChatInput(BaseModel):
+    message: str
+
+FAQ_KNOWLEDGE = {
+    # CYBER
+    "ddos": "Une attaque DDoS (Déni de Service Distribué) vise à rendre un serveur indisponible en le submergeant de requêtes provenant de multiples sources.",
+    "dos": "Une attaque DoS (Déni de Service) sature un serveur avec des requêtes pour le rendre inaccessible, mais depuis une seule source.",
+    "probe": "Une attaque Probe (Sonde) scanne les ports d'un réseau pour détecter des vulnérabilités.",
+    "phishing": "Le phishing (hameçonnage) consiste à tromper un utilisateur pour qu'il révèle des informations sensibles (mots de passe, CB).",
+    "r2l": "R2L (Remote to Local) : Un attaquant distant tente d'obtenir un accès utilisateur local sur une machine.",
+    "u2r": "U2R (User to Root) : Un utilisateur normal tente d'obtenir les privilèges administrateur (root).",
+    "sql": "L'injection SQL consiste à insérer du code malveillant dans une requête de base de données.",
+    
+    # SANTE
+    "covid": "Les symptômes courants du COVID-19 incluent fièvre, toux sèche, fatigue et perte de goût/odorat.",
+    "grippe": "La grippe se manifeste par une fièvre brutale, des courbatures, une toux sèche et une grande fatigue.",
+    "fievre": "Une fièvre supérieure à 38°C peut indiquer une infection. Restez hydraté et surveillez votre température.",
+    "urgence": "En cas de douleur thoracique intense, difficulté à respirer ou perte de connaissance, appelez immédiatement les secours (15 ou 112).",
+    "prevention": "Lavez-vous les mains régulièrement, portez un masque si malade et maintenez une distance physique.",
+}
+
+@app.post("/chat")
+def chat_bot(data: ChatInput, current_user: User = Depends(get_current_user)):
+    user_msg = data.message.lower().strip()
+    
+    # Recherche simple par mots-clés
+    reponse = "Je ne suis pas sûr de comprendre. Pouvez-vous préciser votre question sur la cybersécurité ou la santé ?"
+    
+    # Priorité aux correspondances exactes
+    for key, val in FAQ_KNOWLEDGE.items():
+        if key in user_msg:
+            reponse = val
+            break
+            
+    # Réponses contextuelles basiques
+    if "bonjour" in user_msg or "salut" in user_msg:
+        reponse = f"Bonjour {current_user.full_name} ! Comment puis-je vous aider aujourd'hui ?"
+    elif "merci" in user_msg:
+        reponse = "Avec plaisir ! N'hésitez pas si vous avez d'autres questions."
+    elif "aide" in user_msg:
+        reponse = "Je peux vous renseigner sur les types d'attaques (DDoS, Phishing...) ou les symptômes médicaux (Grippe, COVID...)."
+
+    return {"response": reponse}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
