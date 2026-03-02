@@ -98,3 +98,4 @@ kotighi/
 ## 👤 Auteur
 
 Fait avec ❤️ et Python · Propulsé par [Streamlit](https://streamlit.io)
+# Kotighi-AI
