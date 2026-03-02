@@ -10,7 +10,8 @@ COPY api_kotighi.py .
 COPY cyber_nslkdd.py .
 COPY kotighi_ai.py .
 # Copier les modèles s'ils existent (sinon ils seront simulés/ré-entraînés au démarrage)
-# COPY *.pkl .
+COPY *.pkl .
+COPY train_models.py .
 
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt

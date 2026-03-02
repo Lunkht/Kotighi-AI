@@ -57,25 +57,32 @@ class SanteInput(BaseModel):
     palpitations: int
     vertiges: int
 
-# --- CHARGEMENT DES MODÈLES (Simulé pour l'exemple API) ---
-# En production, il vaut mieux charger des fichiers .pkl pré-entraînés
+# --- CHARGEMENT DES MODÈLES ---
 def load_models():
-    # Simulation de chargement rapide
-    # Cyber
-    np.random.seed(42); N=100
-    X = pd.DataFrame(np.random.randint(0,100,(N,6)), columns=["requetes_min","duree","octets","ports_scanes","taux_erreur","flag_suspect"])
-    y = np.random.randint(0,2,N)
-    sc = StandardScaler(); Xs = sc.fit_transform(X)
-    m_cyber = RandomForestClassifier().fit(Xs,y)
-    
-    # Sante
-    cols_sante = ["fievre","toux","fatigue","maux_tete","douleur_gorge","nausees","douleur_thorax","essoufflement","diarrhee","frissons","perte_odorat","douleurs_musculaires","palpitations","vertiges"]
-    X_s = pd.DataFrame(np.random.randint(0,2,(N,14)), columns=cols_sante)
-    y_s = np.random.randint(0,8,N)
-    m_sante = RandomForestClassifier().fit(X_s,y_s)
-    labels_sante = ["COVID-19","Grippe","Problème cardiaque","Gastro-entérite","Migraine","Angine","Asthme/Stress","Symptômes non spécifiques"]
-    
-    return m_cyber, sc, m_sante, labels_sante
+    print("📦 Chargement des modèles...")
+    try:
+        # Cyber
+        with open("model_cyber.pkl", "rb") as f:
+            m_cyber = pickle.load(f)
+        with open("scaler_cyber.pkl", "rb") as f:
+            sc_cyber = pickle.load(f)
+        
+        # Sante
+        with open("model_sante.pkl", "rb") as f:
+            m_sante = pickle.load(f)
+        with open("labels_sante.pkl", "rb") as f:
+            labels_sante = pickle.load(f)
+            
+        print("✅ Modèles chargés avec succès !")
+        return m_cyber, sc_cyber, m_sante, labels_sante
+
+    except FileNotFoundError:
+        print("⚠️ Modèles non trouvés ! Exécutez train_models.py d'abord.")
+        # Fallback : on recrée des modèles vides pour éviter le crash (mode dégradé)
+        # Mais en production Docker, cela ne devrait pas arriver si les fichiers sont copiés
+        from train_models import train_and_save
+        train_and_save()
+        return load_models()
 
 m_cyber, sc_cyber, m_sante, labels_sante = load_models()
 
