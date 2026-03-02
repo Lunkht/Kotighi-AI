@@ -61,6 +61,7 @@ def train_and_save():
     np.random.seed(99)
     N = 4000
     
+    # Extension des symptômes pour plus de précision (nouveaux symptômes ajoutés dans app_kotighi.py)
     cols_sante = ["fievre","toux","fatigue","maux_tete","douleur_gorge","nausees","douleur_thorax","essoufflement","diarrhee","frissons","perte_odorat","douleurs_musculaires","palpitations","vertiges"]
     
     # Génération aléatoire de base
@@ -68,6 +69,7 @@ def train_and_save():
     
     # Fonction de diagnostic exacte de app_kotighi.py
     def diag(r):
+        # Règles plus complexes pour l'amélioration de la santé
         if r["fievre"] and r["toux"] and r["perte_odorat"]: return 0 # COVID-19
         if r["fievre"] and r["toux"] and r["fatigue"] and r["douleurs_musculaires"]: return 1 # Grippe
         if r["douleur_thorax"] and r["essoufflement"] and r["palpitations"]: return 2 # Problème cardiaque
@@ -91,7 +93,7 @@ def train_and_save():
     conseils_sante = {
         "COVID-19": ["Isolement immédiat", "Test PCR/Antigénique", "Port du masque", "Surveillance saturation oxygène"],
         "Grippe": ["Repos complet", "Hydratation régulière", "Paracétamol si fièvre", "Éviter contact personnes fragiles"],
-        "Problème cardiaque": ["Appeler le 15 (SAMU) immédiatement", "Ne pas conduire", "Rester assis/allongé", "Prendre aspirine si non-allergique"],
+        "Problème cardiaque": ["Appeler le 15 (SAMU) immédiatement", "Ne pas conduire", "Rester assis/allongé", "Prendre aspirine si non-allergique (sur avis médical)"],
         "Gastro-entérite": ["Boire solutions réhydratation", "Régime riz/carottes", "Lavage mains fréquent", "Éviter laitages"],
         "Migraine": ["Repos dans le noir/silence", "Caféine peut aider", "Compresse froide sur front", "Éviter écrans"],
         "Angine": ["Consulter pour test TDR", "Boissons chaudes miel/citron", "Gargarisme eau salée", "Surveiller fièvre"],
