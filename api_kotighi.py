@@ -72,9 +72,11 @@ def load_models():
             m_sante = pickle.load(f)
         with open("labels_sante.pkl", "rb") as f:
             labels_sante = pickle.load(f)
+        with open("conseils_sante.pkl", "rb") as f:
+            conseils_sante = pickle.load(f)
             
         print("✅ Modèles chargés avec succès !")
-        return m_cyber, sc_cyber, m_sante, labels_sante
+        return m_cyber, sc_cyber, m_sante, labels_sante, conseils_sante
 
     except FileNotFoundError:
         print("⚠️ Modèles non trouvés ! Exécutez train_models.py d'abord.")
@@ -84,7 +86,7 @@ def load_models():
         train_and_save()
         return load_models()
 
-m_cyber, sc_cyber, m_sante, labels_sante = load_models()
+m_cyber, sc_cyber, m_sante, labels_sante, conseils_sante = load_models()
 
 # --- ENDPOINTS ---
 
@@ -148,11 +150,15 @@ def predict_sante(data: SanteInput):
         diag = labels_sante[pred]
         urgent = "cardiaque" in diag.lower() or "covid" in diag.lower()
         
+        # Récupération des conseils
+        conseils = conseils_sante.get(diag, [])
+
         return {
             "prediction_id": pred,
             "diagnostic": diag,
             "urgent": urgent,
             "confiance": round(proba[pred] * 100, 2),
+            "conseils": conseils,
             "toutes_probabilites": {labels_sante[i]: round(p*100, 2) for i, p in enumerate(proba)}
         }
     except Exception as e:

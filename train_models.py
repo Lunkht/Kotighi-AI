@@ -1,39 +1,51 @@
 # ============================================================
-#  Script d'entraînement des modèles IA
+#  Script d'entraînement des modèles IA (SYNCHRONISÉ AVEC STREAMLIT)
 #  Génère des fichiers .pkl pour une utilisation en production
 # ============================================================
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 
 def train_and_save():
-    print("🚀 Démarrage de l'entraînement des modèles...")
+    print("🚀 Démarrage de l'entraînement des modèles (Sync Streamlit)...")
 
-    # --- 1. MODULE CYBER (Simulation NSL-KDD) ---
+    # --- 1. MODULE CYBER (Logique app_kotighi.py) ---
     print("🔒 Entraînement du modèle Cybersécurité...")
     np.random.seed(42)
-    N = 2000
+    N = 4000
     
-    # Données simulées (mais plus réalistes)
-    # 0 = Normal, 1 = Attaque
-    X_cyber = pd.DataFrame({
-        "requetes_min": np.concatenate([np.random.randint(10, 200, 1000), np.random.randint(800, 5000, 1000)]),
-        "duree":        np.concatenate([np.random.randint(1, 60, 1000),   np.random.randint(1, 5, 1000)]),
-        "octets":       np.concatenate([np.random.randint(100, 5000, 1000), np.random.randint(50, 200, 1000)]),
-        "ports_scanes": np.concatenate([np.random.randint(1, 5, 1000),    np.random.randint(10, 100, 1000)]),
-        "taux_erreur":  np.concatenate([np.random.uniform(0, 0.1, 1000),  np.random.uniform(0.5, 1.0, 1000)]),
-        "flag_suspect": np.concatenate([np.zeros(1000),                   np.ones(1000)])
+    # Génération données normales
+    n = pd.DataFrame({
+        "requetes_min": np.random.randint(5, 300, N//2),
+        "duree":        np.random.randint(10, 120, N//2),
+        "octets":       np.random.randint(500, 10000, N//2),
+        "ports_scanes": np.random.randint(1, 4, N//2),
+        "taux_erreur":  np.random.uniform(0, 0.1, N//2),
+        "flag_suspect": np.zeros(N//2)
     })
-    y_cyber = np.concatenate([np.zeros(1000), np.ones(1000)]) # 0=Normal, 1=Attaque
+    
+    # Génération données attaques
+    a = pd.DataFrame({
+        "requetes_min": np.random.randint(500, 8000, N//2),
+        "duree":        np.random.randint(0, 5, N//2),
+        "octets":       np.random.randint(10, 300, N//2),
+        "ports_scanes": np.random.randint(20, 200, N//2),
+        "taux_erreur":  np.random.uniform(0.5, 1.0, N//2),
+        "flag_suspect": np.ones(N//2)
+    })
+
+    df_cyber = pd.concat([n.assign(label=0), a.assign(label=1)]).sample(frac=1, random_state=42)
+    X_cyber = df_cyber.drop("label", axis=1)
+    y_cyber = df_cyber["label"]
 
     # Normalisation
     scaler_cyber = StandardScaler()
     X_cyber_scaled = scaler_cyber.fit_transform(X_cyber)
 
-    # Entraînement
-    model_cyber = RandomForestClassifier(n_estimators=100, random_state=42)
+    # Entraînement (Random Forest comme principal)
+    model_cyber = RandomForestClassifier(n_estimators=150, random_state=42, n_jobs=-1)
     model_cyber.fit(X_cyber_scaled, y_cyber)
 
     # Sauvegarde
@@ -41,76 +53,63 @@ def train_and_save():
         pickle.dump(model_cyber, f)
     with open("scaler_cyber.pkl", "wb") as f:
         pickle.dump(scaler_cyber, f)
-    print("✅ Modèle Cyber sauvegardé (model_cyber.pkl, scaler_cyber.pkl)")
+    print("✅ Modèle Cyber sauvegardé")
 
 
-    # --- 2. MODULE SANTÉ (Simulation Symptômes) ---
+    # --- 2. MODULE SANTÉ (Logique app_kotighi.py) ---
     print("🏥 Entraînement du modèle Santé...")
-    # Labels : 0=COVID, 1=Grippe, 2=Cardiaque, 3=Gastro, 4=Migraine, 5=Angine, 6=Stress, 7=Rien
-    labels_sante = ["COVID-19", "Grippe", "Problème cardiaque", "Gastro-entérite", "Migraine", "Angine", "Asthme/Stress", "Symptômes non spécifiques"]
+    np.random.seed(99)
+    N = 4000
     
-    # On crée un dataset manuel pour garantir la logique médicale de base
-    data = []
+    cols_sante = ["fievre","toux","fatigue","maux_tete","douleur_gorge","nausees","douleur_thorax","essoufflement","diarrhee","frissons","perte_odorat","douleurs_musculaires","palpitations","vertiges"]
     
-    # Helper pour générer n cas d'une maladie avec du bruit
-    def generate_cases(n, maladie_idx, base_symptoms):
-        # base_symptoms = [fievre, toux, ..., vertiges] (14 items)
-        for _ in range(n):
-            symptoms = list(base_symptoms)
-            # Ajouter un peu de bruit (changer 1 symptôme au hasard)
-            if np.random.rand() < 0.2:
-                idx = np.random.randint(0, 14)
-                symptoms[idx] = 1 - symptoms[idx]
-            data.append(symptoms + [maladie_idx])
+    # Génération aléatoire de base
+    d = pd.DataFrame({c: np.random.randint(0, 2, N) for c in cols_sante})
+    
+    # Fonction de diagnostic exacte de app_kotighi.py
+    def diag(r):
+        if r["fievre"] and r["toux"] and r["perte_odorat"]: return 0 # COVID-19
+        if r["fievre"] and r["toux"] and r["fatigue"] and r["douleurs_musculaires"]: return 1 # Grippe
+        if r["douleur_thorax"] and r["essoufflement"] and r["palpitations"]: return 2 # Problème cardiaque
+        if r["nausees"] and r["diarrhee"] and r["fatigue"]: return 3 # Gastro-entérite
+        if r["maux_tete"] and r["fatigue"] and r["vertiges"]: return 4 # Migraine / Fatigue intense
+        if r["douleur_gorge"] and r["fievre"] and r["frissons"]: return 5 # Angine
+        if r["essoufflement"] and r["douleur_thorax"] and not r["fievre"]: return 6 # Asthme / Stress
+        return 7 # Symptômes non spécifiques
 
-    # Définition des profils types (14 symptômes)
-    # fievre, toux, fatigue, tete, gorge, nausees, thorax, essoufl, diarrhee, frissons, odorat, musc, palpit, vertiges
+    d["label"] = d.apply(diag, axis=1)
     
-    # 0: COVID (Fievre, Toux, Fatigue, Odorat)
-    generate_cases(200, 0, [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0])
-    
-    # 1: Grippe (Fievre, Toux, Fatigue, Frissons, Musc)
-    generate_cases(200, 1, [1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0])
-    
-    # 2: Cardiaque (Thorax, Essoufflement, Palpitations)
-    generate_cases(200, 2, [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0])
-    
-    # 3: Gastro (Nausees, Diarrhee, Fatigue)
-    generate_cases(200, 3, [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0])
-    
-    # 4: Migraine (Tete, Nausees)
-    generate_cases(200, 4, [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1])
-    
-    # 5: Angine (Fievre, Gorge)
-    generate_cases(200, 5, [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    X_sante = d.drop("label", axis=1)
+    y_sante = d["label"]
 
-    # 6: Stress (Palpitations, Essoufflement, Vertiges)
-    generate_cases(200, 6, [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1])
-
-    # 7: Rien (Peu de symptômes)
-    generate_cases(200, 7, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-
-    df_sante = pd.DataFrame(data, columns=[
-        "fievre","toux","fatigue","maux_tete","douleur_gorge","nausees","douleur_thorax",
-        "essoufflement","diarrhee","frissons","perte_odorat","douleurs_musculaires","palpitations","vertiges",
-        "label"
-    ])
-    
-    X_sante = df_sante.drop("label", axis=1)
-    y_sante = df_sante["label"]
-
-    model_sante = RandomForestClassifier(n_estimators=100, random_state=42)
+    model_sante = RandomForestClassifier(n_estimators=200, random_state=42)
     model_sante.fit(X_sante, y_sante)
+
+    # Labels et Conseils (identiques à app_kotighi.py)
+    labels_sante = ["COVID-19","Grippe","Problème cardiaque","Gastro-entérite","Migraine","Angine","Asthme/Stress","Symptômes non spécifiques"]
+    
+    conseils_sante = {
+        "COVID-19": ["Isolement immédiat", "Test PCR/Antigénique", "Port du masque", "Surveillance saturation oxygène"],
+        "Grippe": ["Repos complet", "Hydratation régulière", "Paracétamol si fièvre", "Éviter contact personnes fragiles"],
+        "Problème cardiaque": ["Appeler le 15 (SAMU) immédiatement", "Ne pas conduire", "Rester assis/allongé", "Prendre aspirine si non-allergique"],
+        "Gastro-entérite": ["Boire solutions réhydratation", "Régime riz/carottes", "Lavage mains fréquent", "Éviter laitages"],
+        "Migraine": ["Repos dans le noir/silence", "Caféine peut aider", "Compresse froide sur front", "Éviter écrans"],
+        "Angine": ["Consulter pour test TDR", "Boissons chaudes miel/citron", "Gargarisme eau salée", "Surveiller fièvre"],
+        "Asthme/Stress": ["Exercices respiration (cohérence cardiaque)", "S'asseoir droit", "Utiliser inhalateur si prescrit", "Éloigner allergènes"],
+        "Symptômes non spécifiques": ["Surveiller évolution 24h", "Prendre température matin/soir", "Consulter si aggravation"]
+    }
 
     with open("model_sante.pkl", "wb") as f:
         pickle.dump(model_sante, f)
     
-    # On sauvegarde aussi la liste des labels pour que l'API puisse les lire
     with open("labels_sante.pkl", "wb") as f:
         pickle.dump(labels_sante, f)
+        
+    with open("conseils_sante.pkl", "wb") as f:
+        pickle.dump(conseils_sante, f)
 
-    print("✅ Modèle Santé sauvegardé (model_sante.pkl, labels_sante.pkl)")
-    print("\n🎉 Terminé ! Les fichiers .pkl sont prêts.")
+    print("✅ Modèle Santé sauvegardé (avec conseils)")
+    print("\n🎉 Synchronisation terminée ! Les modèles sont identiques au projet Streamlit.")
 
 if __name__ == "__main__":
     train_and_save()
