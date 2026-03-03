@@ -27,9 +27,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-SECRET_KEY = "kotighi_secret_key_change_me_in_prod" # A changer en prod
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 24 heures
+# Charger depuis variables d'environnement (fichier .env)
+from dotenv import load_dotenv
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY", "kotighi_secret_key_change_me_in_prod")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 1440))
 
 # Database URL (PostgreSQL sur Render ou SQLite local)
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./kotighi.db")

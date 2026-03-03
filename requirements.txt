@@ -12,3 +12,9 @@ pydantic
 streamlit-lottie
 python-jose[cryptography]
 passlib[bcrypt]
+python-dotenv
+pytest
+pytest-cov
+httpx
+supabase>=2.0.0
+postgrest-py
