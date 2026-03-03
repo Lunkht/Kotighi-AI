@@ -29,10 +29,9 @@ except Exception:
 def init_db():
     try:
         engine = sa.create_engine(DB_URL)
-        # Ici on simulerait la création des tables si elles n'existent pas
         return engine
     except Exception as e:
-        st.error(f"Erreur de connexion PostgreSQL : {e}")
+        # On ne bloque pas l'application pour une erreur de DB facultative
         return None
 
 # ── AUTH ──────────────────────────────────────────────────────────
@@ -85,11 +84,11 @@ def apply_theme():
     card     = "#0F1117" if is_dark else "#FFFFFF"
     border   = "#1C1F2E" if is_dark else "#CBD5E1"
     subtext  = "#64748B"
-    primary  = "#00E5FF"
-    accent   = "#8B5CF6"
+    primary  = "#FF8C00" # Orange Rebranding
+    accent   = "#6C5CE7"
     danger   = "#EF4444"
     warning  = "#F59E0B"
-    success  = "#10B981"
+    success  = "#FF8C00"
     sidebar_bg = "#0A0B10" if is_dark else "#F8FAFC"
 
     st.markdown(f"""<style>
@@ -395,7 +394,7 @@ def page_login():
     # Header central
     st.markdown(f"""
         <div style='text-align: center; padding-top: 10vh; margin-bottom: 2rem;'>
-            <div style='width: 150px; margin: 0 auto 1rem;'>{get_logo_html('#00E5FF')}</div>
+            <div style='width: 150px; margin: 0 auto 1rem;'>{get_logo_html('#FF8C00')}</div>
             <p style='color: #64748B; font-weight: 500; letter-spacing: 1.5px; font-size: 0.75rem; text-transform: uppercase;'>Plateforme d'Intelligence Analytique</p>
         </div>
     """, unsafe_allow_html=True)
@@ -474,9 +473,9 @@ def page_login():
             <div style='margin-top: 2rem; text-align: center;'>
                 <span class='k-badge' style='font-size: 0.6rem; opacity: 0.8;'>SÉCURISÉ PAR KOTIGHI SHIELD v3.0</span>
                 <p style='color: #64748B; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; margin-top: 1.5rem; line-height: 1.6;'>
-                    DEMO : <span style='color: #00E5FF;'>admin</span> / kotighi2024 &nbsp;•&nbsp; 
-                    <span style='color: #00E5FF;'>analyste</span> / analyse123 &nbsp;•&nbsp; 
-                    <span style='color: #00E5FF;'>medecin</span> / sante456
+                    DEMO : <span style='color: #FF8C00;'>admin</span> / kotighi2024 &nbsp;•&nbsp; 
+                    <span style='color: #FF8C00;'>analyste</span> / analyse123 &nbsp;•&nbsp; 
+                    <span style='color: #FF8C00;'>medecin</span> / sante456
                 </p>
             </div>
         """, unsafe_allow_html=True)
@@ -720,7 +719,7 @@ def app():
                         cols = st.columns([2, 1, 1, 1])
                         with cols[0]: st.markdown(f"**{target['ip']}**")
                         with cols[1]: st.caption(f"{traffic} req/m")
-                        with cols[2]: st.markdown(f"<span style='color:{'#EF4444' if is_threat else '#10B981'}'>{status_txt}</span>", unsafe_allow_html=True)
+                        with cols[2]: st.markdown(f"<span style='color:{'#EF4444' if is_threat else '#FF8C00'}'>{status_txt}</span>", unsafe_allow_html=True)
                         with cols[3]: 
                             if st.button("X", key=f"del_{target['ip']}"):
                                 st.session_state.watchlist.remove(target)
@@ -825,7 +824,7 @@ def app():
                         
                         # Logique d'urgence
                         is_urgent = "cardiaque" in diag.lower() or "covid" in diag.lower() or conf < 60
-                        color_res = "#EF4444" if is_urgent else ("#F59E0B" if conf < 80 else "#10B981")
+                        color_res = "#EF4444" if is_urgent else ("#F59E0B" if conf < 80 else "#FF8C00")
                         
                         # SVG Icons
                         svg_alert = """<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>"""

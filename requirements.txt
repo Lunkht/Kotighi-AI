@@ -9,6 +9,7 @@ cryptography
 fastapi
 uvicorn
 pydantic
+pydantic-settings
 streamlit-lottie
 python-jose[cryptography]
 passlib[bcrypt]
@@ -18,3 +19,4 @@ pytest-cov
 httpx
 supabase>=2.0.0
 postgrest-py
+python-multipart
