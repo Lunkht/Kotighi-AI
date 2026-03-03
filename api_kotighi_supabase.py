@@ -98,10 +98,13 @@ app.add_middleware(
 class UserCreate(BaseModel):
     username: str
     password: str
-    full_name: str
-    role: str = "Utilisateur"
-    email: Optional[EmailStr] = None
+    full_name: Optional[str] = None
+    role: str = "user"
+    email: EmailStr
+    address: Optional[str] = None
     phone: Optional[str] = None
+    country: Optional[str] = None
+    organisation: Optional[str] = None
 
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
@@ -112,9 +115,9 @@ class UserUpdate(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
-    user_id: int
+    user_id: str  # id is uuid
     username: str
-    full_name: str
+    full_name: Optional[str] = None
     role: str
 
 class CyberInput(BaseModel):
@@ -198,16 +201,19 @@ def signup(user: UserCreate, supabase: Client = Depends(get_supabase)):
         raise HTTPException(status_code=400, detail="Ce nom d'utilisateur existe déjà")
     
     # Hasher le mot de passe
-    hashed_password = get_password_hash(user.password)
+    password_hash = get_password_hash(user.password)
     
     # Créer l'utilisateur dans Supabase
     new_user_data = {
         "username": user.username,
-        "hashed_password": hashed_password,
+        "password_hash": password_hash,
         "full_name": user.full_name,
         "role": user.role,
         "email": user.email,
-        "phone": user.phone
+        "phone": user.phone,
+        "address": user.address,
+        "country": user.country,
+        "organisation": user.organisation
     }
     
     response = supabase.table("users").insert(new_user_data).execute()
@@ -261,7 +267,7 @@ def login(user_data: UserCreate, supabase: Client = Depends(get_supabase)):
     user = response.data[0]
     
     # Vérifier le mot de passe
-    if not verify_password(user_data.password, user["hashed_password"]):
+    if not verify_password(user_data.password, user["password_hash"]):
         raise HTTPException(status_code=401, detail="Identifiants incorrects")
     
     # Générer le token JWT
@@ -293,7 +299,7 @@ def login_for_access_token(
     
     user = response.data[0]
     
-    if not verify_password(form_data.password, user["hashed_password"]):
+    if not verify_password(form_data.password, user["password_hash"]):
         raise HTTPException(status_code=401, detail="Incorrect username or password")
     
     access_token = create_access_token(
