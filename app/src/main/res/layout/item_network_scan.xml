@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="16dp"
+    app:strokeWidth="3dp"
+    app:strokeColor="@color/accent_cyan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header: SSID et Niveau -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/network"
+                app:tint="@color/accent_cyan"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtSsid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HomeNetwork"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"/>
+
+                <TextView
+                    android:id="@+id/txtBssid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:11:22:33:44:55"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:textColor="?attr/android:textColorSecondary"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipVulnLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CRITIQUE"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/accent_red"
+                app:chipBackgroundColor="@color/accent_red_alpha"
+                app:chipStrokeWidth="0dp"
+                app:chipMinHeight="28dp"/>
+
+        </LinearLayout>
+
+        <!-- Informations réseau -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <!-- Signal -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Signal"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"/>
+
+                <TextView
+                    android:id="@+id/txtSignal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-45 dBm"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"/>
+
+                <TextView
+                    android:id="@+id/txtSignalBars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▂▂▂▂"
+                    android:textSize="12sp"
+                    android:textColor="@color/accent_cyan"/>
+
+            </LinearLayout>
+
+            <!-- Chiffrement -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chiffrement"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"/>
+
+                <TextView
+                    android:id="@+id/txtEncryption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WPA2-PSK"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"/>
+
+            </LinearLayout>
+
+            <!-- Score -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vulnérabilité"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"/>
+
+                <TextView
+                    android:id="@+id/txtVulnScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="85.0/100"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent_red"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Fréquence et Canal -->
+        <TextView
+            android:id="@+id/txtFrequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.4 GHz • Canal 6"
+            android:textSize="12sp"
+            android:textColor="?attr/android:textColorSecondary"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Vulnérabilités détectées -->
+        <LinearLayout
+            android:id="@+id/layoutVulnerabilities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@drawable/bg_error"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠️ Vulnérabilités détectées"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/accent_red"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/txtVulnerabilities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Réseau ouvert sans chiffrement\n• Signal très fort - facilement accessible"
+                android:textSize="11sp"
+                android:textColor="@color/accent_red"
+                android:lineSpacingMultiplier="1.3"/>
+
+        </LinearLayout>
+
+        <!-- Informations supplémentaires (scan approfondi) -->
+        <LinearLayout
+            android:id="@+id/layoutExtraInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@drawable/bg_card"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊 Scan approfondi"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/accent_cyan"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/txtIpRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plage IP: 192.168.1.0/24"
+                android:textSize="11sp"
+                android:textColor="?attr/android:textColorSecondary"
+                android:fontFamily="monospace"/>
+
+            <TextView
+                android:id="@+id/txtDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12 appareil(s) détecté(s)"
+                android:textSize="11sp"
+                android:textColor="?attr/android:textColorSecondary"/>
+
+            <TextView
+                android:id="@+id/txtOpenPorts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5 port(s) ouvert(s)"
+                android:textSize="11sp"
+                android:textColor="?attr/android:textColorSecondary"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

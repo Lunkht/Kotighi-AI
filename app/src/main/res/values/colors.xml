@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Couleurs communes (Accents) -->
+    <color name="accent_cyan">#FF8C00</color> <!-- Rebranded to Orange -->
+    <color name="accent_purple">#6C5CE7</color>
+    <color name="accent_red">#D63031</color>
+    <color name="accent_orange">#E17055</color>
+    <color name="accent_green">#FF8C00</color>
+    <color name="accent_health">#D63031</color>
+    
+    <!-- Alpha variants -->
+    <color name="accent_cyan_alpha">#1AFF8C00</color>
+    <color name="accent_red_alpha">#1AD63031</color>
+    
+    <color name="success">#FF8C00</color>
+    <color name="danger">#D63031</color>
+    <color name="warning">#E17055</color>
+    <color name="info">#0984E3</color>
+
+    <!-- Palette Mode CLAIR (Défaut) -->
+    <color name="bg_dark">#F5F6FA</color>
+    <color name="bg_surface">#FFFFFF</color>
+    <color name="bg_border">#DCDDE1</color>
+    <color name="text_primary">#2F3640</color>
+    <color name="text_secondary">#7F8C8D</color>
+    <color name="text_muted">#95A5A6</color>
+</resources>

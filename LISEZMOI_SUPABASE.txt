@@ -1,0 +1,148 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║         🚀 KOTIGHI AI - INTÉGRATION SUPABASE 🚀                ║
+║                                                                ║
+║     Base de Données Cloud PostgreSQL pour KOTIGHI AI          ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+✅ INTÉGRATION SUPABASE COMPLÈTE !
+
+📋 CE QUI A ÉTÉ AJOUTÉ :
+
+1. ✅ Configuration Supabase
+   - supabase_config.py (configuration)
+   - api_kotighi_supabase.py (API avec Supabase)
+   - Script de configuration automatique
+
+2. ✅ Schéma de Base de Données
+   - Table users (utilisateurs)
+   - Table historique (analyses)
+   - Table profils (profils enrichis)
+   - Table notifications (alertes)
+   - Index de performance
+   - Triggers auto-update
+
+3. ✅ Nouveaux Endpoints
+   - GET /me (profil + stats)
+   - PUT /me (mise à jour profil)
+   - GET /notifications (liste)
+   - PUT /notifications/{id}/lire
+   - GET /stats (statistiques)
+
+4. ✅ Fonctionnalités
+   - Notifications automatiques
+   - Profils enrichis (avatar, bio, etc.)
+   - Statistiques avancées
+   - Alertes intelligentes
+
+📦 FICHIERS CRÉÉS :
+
+- Kotighi-AI/supabase_config.py
+- Kotighi-AI/api_kotighi_supabase.py
+- SUPABASE_SETUP.md (guide complet)
+- SUPABASE_INTEGRATION.md (résumé)
+- scripts/switch-to-supabase.sh
+- LISEZMOI_SUPABASE.txt (ce fichier)
+
+🚀 DÉMARRAGE RAPIDE :
+
+Option 1 : Script Automatique (Recommandé)
+   ./scripts/switch-to-supabase.sh
+
+Option 2 : Makefile
+   make setup-supabase
+   make run-api-supabase
+
+Option 3 : Manuel
+   1. cd Kotighi-AI
+   2. pip install supabase postgrest-py
+   3. Configurer .env avec vos clés Supabase
+   4. Exécuter le SQL dans Supabase SQL Editor
+   5. uvicorn api_kotighi_supabase:app --reload
+
+📚 DOCUMENTATION :
+
+- SUPABASE_SETUP.md       → Guide complet étape par étape
+- SUPABASE_INTEGRATION.md → Résumé de l'intégration
+- .env.example            → Template de configuration
+
+🔑 CONFIGURATION REQUISE :
+
+1. Compte Supabase (gratuit)
+   → https://supabase.com
+
+2. Clés API (Dashboard → Settings → API)
+   - Project URL
+   - anon public key
+   - service_role key
+
+3. Mot de passe PostgreSQL
+   → Dashboard → Settings → Database
+
+4. Fichier .env
+   DATABASE_URL=postgresql://postgres:[PASSWORD]@db...
+   SUPABASE_URL=https://izeukppgxagzvwfhiqra.supabase.co
+   SUPABASE_KEY=votre_anon_key
+   SUPABASE_SERVICE_KEY=votre_service_role_key
+
+🧪 TESTER :
+
+1. Créer un compte :
+   curl -X POST http://localhost:8000/signup \
+     -H "Content-Type: application/json" \
+     -d '{"username":"test","password":"Test123!","full_name":"Test"}'
+
+2. Vérifier dans Supabase :
+   Dashboard → Table Editor → users
+
+3. Faire une analyse :
+   curl -X POST http://localhost:8000/predict/cyber \
+     -H "Authorization: Bearer TOKEN" \
+     -d '{"requetes_min":1000,...}'
+
+4. Voir les notifications :
+   curl -X GET http://localhost:8000/notifications \
+     -H "Authorization: Bearer TOKEN"
+
+✨ AVANTAGES SUPABASE :
+
+✅ Base de données PostgreSQL cloud
+✅ Dashboard visuel intuitif
+✅ Backups automatiques quotidiens
+✅ Scaling automatique
+✅ API REST auto-générée
+✅ Monitoring en temps réel
+✅ SSL/TLS par défaut
+✅ Plan gratuit généreux (500MB)
+
+📊 NOUVELLES FONCTIONNALITÉS :
+
+- Notifications automatiques (bienvenue, alertes)
+- Profils enrichis (avatar, bio, spécialité)
+- Statistiques avancées par utilisateur
+- Historique avec filtres
+- Gestion des notifications (lu/non lu)
+
+🔄 COMPATIBILITÉ :
+
+✅ L'app Android fonctionne sans modification !
+✅ Tous les endpoints existants sont compatibles
+✅ Nouvelles fonctionnalités disponibles immédiatement
+
+🆘 AIDE :
+
+- Documentation : SUPABASE_SETUP.md
+- Support : support@vulsoft.com
+- Issues : GitHub Issues
+
+---
+
+VOTRE PROJET EST MAINTENANT CONNECTÉ À SUPABASE ! 🎉
+
+Base de données cloud professionnelle, backups automatiques,
+dashboard intuitif... Profitez de tous les avantages !
+
+---
+VULSOFT - KOTIGHI AI v2.0.0 (Supabase Edition)
+Date : 2 Mars 2026

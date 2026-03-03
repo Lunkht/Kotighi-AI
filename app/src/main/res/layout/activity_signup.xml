@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ============================================================
+     KOTIGHI AI — Layout ecran d'inscription
+     res/layout/activity_signup.xml
+     ============================================================ -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0a0a0f"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:minHeight="600dp">
+
+        <!-- Logo / Titre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="INSCRIPTION"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:fontFamily="sans-serif-condensed"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Rejoignez la plateforme KOTIGHI AI"
+            android:textSize="12sp"
+            android:textColor="#666680"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Card formulaire -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="28dp">
+
+            <!-- Champ Nom -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOM COMPLET"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editNom"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="ex: Jean Dupont"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Identifiant -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IDENTIFIANT"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="Choisis un login"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Email -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="ex: jean@mail.com"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Phone -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TÉLÉPHONE"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="ex: +224..."
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Adresse -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADRESSE"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editAddress"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="Conakry, Guinée"
+                android:inputType="textPostalAddress"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Organisation -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ORGANISATION"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editOrganisation"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="ex: Kotighi Inc."
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ Pays -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAYS"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editCountry"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="ex: Guinée"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MOT DE PASSE"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="Minimum 6 caractères"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Message d'erreur -->
+            <TextView
+                android:id="@+id/txtErreur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_error"
+                android:padding="12dp"
+                android:textColor="#ff4757"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Bouton inscription -->
+            <Button
+                android:id="@+id/btnInscription"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="CREER MON COMPTE"
+                android:textColor="#0a0a0f"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.1"
+                android:background="@drawable/bg_button_primary"
+                android:layout_marginTop="8dp"/>
+
+            <!-- ProgressBar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="#FF8C00"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+
+        <!-- Lien retour connexion -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Deja un compte ?"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/txtConnexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SE CONNECTER"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:letterSpacing="0.1"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

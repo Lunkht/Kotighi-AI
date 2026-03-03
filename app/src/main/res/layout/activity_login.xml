@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ============================================================
+     KOTIGHI AI — Layout ecran de connexion
+     res/layout/activity_login.xml
+     ============================================================ -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0a0a0f"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:minHeight="600dp">
+
+        <!-- Logo / Titre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="KOTIGHI AI"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:fontFamily="sans-serif-condensed"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Sous-titre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="CYBERSECURITE ET SANTE"
+            android:textSize="10sp"
+            android:textColor="#666680"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="48dp"/>
+
+        <!-- Separateur decoratif -->
+        <View
+            android:layout_width="60dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="#FF8C00"
+            android:layout_marginBottom="48dp"/>
+
+        <!-- Card formulaire -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="28dp">
+
+            <!-- Label connexion -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connexion"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#e8e8f0"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Identifiez-vous pour acceder a la plateforme"
+                android:textSize="12sp"
+                android:textColor="#666680"
+                android:layout_marginBottom="28dp"/>
+
+            <!-- Champ identifiant -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IDENTIFIANT"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="Votre login"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Champ mot de passe -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MOT DE PASSE"
+                android:textSize="10sp"
+                android:textColor="#666680"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#e8e8f0"
+                android:textColorHint="#444460"
+                android:hint="Votre mot de passe"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Message d'erreur -->
+            <TextView
+                android:id="@+id/txtErreur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_error"
+                android:padding="12dp"
+                android:textColor="#ff4757"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Bouton connexion -->
+            <Button
+                android:id="@+id/btnConnexion"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="SE CONNECTER"
+                android:textColor="#0a0a0f"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.1"
+                android:background="@drawable/bg_button_primary"
+                android:layout_marginTop="8dp"/>
+
+            <!-- ProgressBar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="#FF8C00"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+
+        <!-- Comptes demo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pas encore de compte ?"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/txtInscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="S'INSCRIRE MAINTENANT"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#FF8C00"
+            android:letterSpacing="0.1"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Comptes demo : admin / kotighi2024"
+            android:textSize="11sp"
+            android:textColor="#444460"
+            android:fontFamily="monospace"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="analyste / analyse123  |  medecin / sante456"
+            android:textSize="11sp"
+            android:textColor="#444460"
+            android:fontFamily="monospace"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+</ScrollView>

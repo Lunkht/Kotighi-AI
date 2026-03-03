@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorOnSecondary"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="?attr/colorOnBackground"
+            android:contentDescription="Retour" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paramètres"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Theme Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APPARENCE"
+        android:textSize="12sp"
+        android:textColor="@color/accent_cyan"
+        android:letterSpacing="0.15"
+        android:fontFamily="monospace"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroupTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mode Clair"
+                android:textColor="?attr/colorOnBackground"
+                android:padding="12dp"
+                android:buttonTint="@color/accent_cyan" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_border"
+                android:layout_marginVertical="8dp" />
+
+            <RadioButton
+                android:id="@+id/radioDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mode Sombre"
+                android:textColor="?attr/colorOnBackground"
+                android:padding="12dp"
+                android:buttonTint="@color/accent_cyan" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_border"
+                android:layout_marginVertical="8dp" />
+
+            <RadioButton
+                android:id="@+id/radioSystem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Par défaut du système"
+                android:textColor="?attr/colorOnBackground"
+                android:padding="12dp"
+                android:buttonTint="@color/accent_cyan" />
+        </RadioGroup>
+
+    </LinearLayout>
+    
+    <!-- INTERFACE Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INTERFACE CYBERSÉCURITÉ"
+        android:textSize="12sp"
+        android:textColor="@color/accent_cyan"
+        android:letterSpacing="0.15"
+        android:fontFamily="monospace"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroupInterface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioModern"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Interface Moderne (Recommandé)"
+                android:textColor="?attr/colorOnBackground"
+                android:padding="12dp"
+                android:checked="true"
+                android:buttonTint="@color/accent_cyan" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_border"
+                android:layout_marginVertical="8dp" />
+
+            <RadioButton
+                android:id="@+id/radioClassic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Interface Classique"
+                android:textColor="?attr/colorOnBackground"
+                android:padding="12dp"
+                android:buttonTint="@color/accent_cyan" />
+        </RadioGroup>
+
+    </LinearLayout>
+    
+    <!-- COMPTE Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COMPTE"
+        android:textSize="12sp"
+        android:textColor="@color/accent_cyan"
+        android:letterSpacing="0.15"
+        android:fontFamily="monospace"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        style="@style/Widget.KotighiAI.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/danger"
+        android:text="Déconnexion" />
+
+</LinearLayout>

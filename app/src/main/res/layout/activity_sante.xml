@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ============================================================
+     KOTIGHI AI — Layout ecran Sante
+     res/layout/activity_sante.xml
+     ============================================================ -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/android:colorBackground">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="?attr/colorOnBackground"
+            android:contentDescription="Retour" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Analyse de symptômes"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tag_red"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="SANTÉ"
+            android:textSize="10sp"
+            android:textColor="@color/accent_health"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.2"/>
+
+    </LinearLayout>
+
+    <!-- Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Avertissement -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_warning"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="!"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#FF0202"
+                    android:layout_marginEnd="12dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Outil préventtif uniquement. Consultez toujours un médecin."
+                    android:textSize="12sp"
+                    android:textColor="#E7E0DF"
+                    android:lineSpacingMultiplier="1.3"/>
+
+            </LinearLayout>
+
+            <!-- Section profil patient -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PROFIL DU PATIENT"
+                android:textSize="10sp"
+                android:textColor="?attr/android:textColorSecondary"
+                android:letterSpacing="0.2"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Age + Duree (2 colonnes) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Âge du patient"
+                        android:textSize="12sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="6dp"/>
+
+                    <EditText
+                        android:id="@+id/editAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textColorHint="?attr/android:textColorSecondary"
+                        android:hint="35"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:fontFamily="monospace"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Durée des symptômes"
+                        android:textSize="12sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="6dp"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerDuree"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="12dp"
+                        android:entries="@array/duree_symptomes"
+                        android:popupBackground="?attr/colorSurface"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Selector Mode (Symptômes vs Blessures) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_card"
+                android:padding="4dp"
+                android:layout_marginBottom="24dp">
+
+                <Button
+                    android:id="@+id/btnModeSymptomes"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="SYMPTÔMES"
+                    android:textSize="11sp"
+                    android:background="@drawable/bg_button_primary"
+                    android:textColor="#FFFFFF"
+                    android:stateListAnimator="@null"/>
+
+                <Button
+                    android:id="@+id/btnModeBlessures"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="BLESSURES"
+                    android:textSize="11sp"
+                    android:background="@android:color/transparent"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:stateListAnimator="@null"/>
+
+            </LinearLayout>
+
+            <!-- Section Signes Vitaux (Nouveau) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGNES VITAUX (SIMULATION)"
+                android:textSize="10sp"
+                android:textColor="?attr/android:textColorSecondary"
+                android:letterSpacing="0.2"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pouls (BPM)"
+                        android:textSize="11sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/editPouls"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bg_input"
+                        android:hint="75"
+                        android:inputType="number"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp"
+                        android:textColor="?attr/android:textColorPrimary"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SpO2 (%)"
+                        android:textSize="11sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/editSpO2"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bg_input"
+                        android:hint="98"
+                        android:inputType="number"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp"
+                        android:textColor="?attr/android:textColorPrimary"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Container Symptômes -->
+            <LinearLayout
+                android:id="@+id/containerSymptomes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SYMPTÔMES PRÉSENTS"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:letterSpacing="0.2"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Symptomes (Switches) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:text="Général"
+                        android:textColor="@color/accent_cyan"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbFievre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fièvre (> 38°C)"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbFrissons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Frissons"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbFatigue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fatigue Intense"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbVertiges"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vertiges"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorControlNormal" android:layout_margin="8dp"/>
+
+                    <TextView
+                        android:text="Respiratoire / ORL"
+                        android:textColor="@color/accent_cyan"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbToux"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Toux"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbEssoufl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Essoufflement"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbGorge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Douleur gorge"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbOdorat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Perte odorat"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorControlNormal" android:layout_margin="8dp"/>
+
+                    <TextView
+                        android:text="Digestif / Autre"
+                        android:textColor="@color/accent_cyan"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbNausees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nausées"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbDiarrhee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Diarrhée"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbTete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Maux de tête"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbThorax"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Douleur thorax"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbMusculaire"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Douleurs musc."
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbPalpitations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Palpitations"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_cyan"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Container Blessures -->
+            <LinearLayout
+                android:id="@+id/containerBlessures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TYPE DE BLESSURE PRÉSUMÉ"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:letterSpacing="0.2"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type de blessure"
+                        android:textSize="12sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="6dp"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerTypeBlessure"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="12dp"
+                        android:entries="@array/types_blessures"
+                        android:popupBackground="?attr/colorSurface"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Localisation"
+                        android:textSize="12sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_marginBottom="6dp"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerLocalisation"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="12dp"
+                        android:entries="@array/localisation_blessure"
+                        android:popupBackground="?attr/colorSurface"
+                        android:layout_marginBottom="16dp"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorControlNormal" android:layout_margin="8dp"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbSaignement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Saignement actif"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_health"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbDeformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Déformation visible"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_health"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/cbPerteConnaissance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Perte de connaissance"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        app:thumbTint="@color/accent_health"
+                        app:trackTint="?attr/colorControlNormal"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bouton analyser -->
+            <Button
+                android:id="@+id/btnAnalyser"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="LANCER L'ANALYSE DIAGNOSTIQUE"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.1"
+                android:background="@drawable/bg_button_primary"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Progress Section -->
+            <LinearLayout
+                android:id="@+id/layoutProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtProgressStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Initialisation de l'analyse..."
+                    android:textSize="12sp"
+                    android:textColor="@color/accent_health"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="center"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBarHorizontal"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:progressDrawable="@drawable/bg_progress_horizontal"
+                    android:max="100"
+                    android:progress="0"/>
+
+            </LinearLayout>
+
+            <!-- Zone resultats -->
+            <LinearLayout
+                android:id="@+id/layoutResultat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorControlNormal"
+                    android:layout_marginBottom="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RÉSULTAT DU DIAGNOSTIC"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:letterSpacing="0.2"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Card urgence -->
+                <TextView
+                    android:id="@+id/txtUrgence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_error"
+                    android:padding="14dp"
+                    android:text="CONSULTATION URGENTE — Appelez le 15"
+                    android:textColor="@color/accent_red"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:fontFamily="monospace"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Card diagnostic -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/txtDiagnostic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Diagnostic : —"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent_health"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/txtConfiance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confiance : —"
+                        android:textSize="14sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:fontFamily="monospace"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:id="@+id/txtProbas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Détails probabilités..."
+                        android:textSize="12sp"
+                        android:textColor="?attr/android:textColorSecondary"
+                        android:fontFamily="monospace"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <!-- Conseils -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONSEILS"
+                    android:textSize="10sp"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:letterSpacing="0.2"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:id="@+id/layoutConseils"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="32dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

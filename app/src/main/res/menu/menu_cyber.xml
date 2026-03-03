@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:title="Paramètres"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/action_auto_update"
+        android:icon="@drawable/auto_update"
+        android:title="Mise à jour auto"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/bell"
+        android:title="Notifications"
+        app:showAsAction="ifRoom"/>
+</menu>

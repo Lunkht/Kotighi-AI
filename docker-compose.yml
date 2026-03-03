@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # API Backend
+  api:
+    build:
+      context: ./Kotighi-AI
+      dockerfile: Dockerfile
+    container_name: kotighi-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://kotighi:kotighi_password@db:5432/kotighi_db
+      - SECRET_KEY=${SECRET_KEY:-change_me_in_production}
+      - API_ENV=production
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - kotighi-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: kotighi-db
+    environment:
+      - POSTGRES_USER=kotighi
+      - POSTGRES_PASSWORD=kotighi_password
+      - POSTGRES_DB=kotighi_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - kotighi-network
+
+  # Streamlit Web Interface (optionnel)
+  streamlit:
+    build:
+      context: ./Kotighi-AI
+      dockerfile: Dockerfile
+    container_name: kotighi-streamlit
+    command: streamlit run app_kotighi.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      - DATABASE_URL=postgresql://kotighi:kotighi_password@db:5432/kotighi_db
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - kotighi-network
+
+volumes:
+  postgres_data:
+
+networks:
+  kotighi-network:
+    driver: bridge

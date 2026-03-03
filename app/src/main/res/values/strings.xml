@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values/strings.xml
+     Toutes les chaines de texte KOTIGHI AI -->
+<resources>
+
+    <!-- App -->
+    <string name="app_name">Kotighi AI</string>
+    <string name="app_tagline">Cybersecurite et Sante</string>
+    <string name="app_version">v1.1</string>
+
+    <!-- Login -->
+    <string name="login_title">Connexion</string>
+    <string name="login_subtitle">Identifiez-vous pour acceder a la plateforme</string>
+    <string name="label_identifiant">IDENTIFIANT</string>
+    <string name="label_mot_de_passe">MOT DE PASSE</string>
+    <string name="hint_login">Votre login</string>
+    <string name="hint_password">Votre mot de passe</string>
+    <string name="btn_connexion">SE CONNECTER</string>
+    <string name="btn_deconnexion">SE DECONNECTER</string>
+    <string name="demo_comptes">Comptes demo : admin / kotighi2024</string>
+    <string name="err_champs_vides">Veuillez remplir tous les champs.</string>
+    <string name="err_identifiants">Identifiants incorrects.</string>
+    <string name="err_reseau">Erreur reseau. Verifiez votre connexion.</string>
+
+    <!-- Navigation -->
+    <string name="nav_accueil">Accueil</string>
+    <string name="nav_cyber">Cybersecurite</string>
+    <string name="nav_sante">Sante</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="label_modules">Modules disponibles</string>
+    <string name="label_bienvenue">Bienvenue</string>
+
+    <!-- Module Cyber -->
+    <string name="cyber_titre">Detection d\'intrusion</string>
+    <string name="cyber_section_params">PARAMETRES DE LA CONNEXION</string>
+    <string name="cyber_label_ip">Adresse IP source</string>
+    <string name="cyber_hint_ip">ex: 192.168.1.100</string>
+    <string name="cyber_label_requetes">Requetes / min</string>
+    <string name="cyber_label_duree">Duree (sec)</string>
+    <string name="cyber_label_octets">Octets transferes</string>
+    <string name="cyber_label_ports">Ports scannes</string>
+    <string name="cyber_label_taux_erreur">Taux d\'erreur</string>
+    <string name="cyber_label_flag">Flag reseau suspect detecte</string>
+    <string name="cyber_btn_analyser">ANALYSER LA CONNEXION</string>
+    <string name="cyber_section_resultat">RESULTAT DE L\'ANALYSE</string>
+    <string name="cyber_section_reco">RECOMMANDATIONS</string>
+    <string name="cyber_verdict_normal">CONNEXION NORMALE</string>
+    <string name="cyber_verdict_attaque">ATTAQUE DETECTEE</string>
+
+    <!-- Module Sante -->
+    <string name="sante_titre">Analyse de symptomes</string>
+    <string name="sante_avertissement">Outil educatif uniquement. Consultez toujours un medecin.</string>
+    <string name="sante_section_profil">PROFIL DU PATIENT</string>
+    <string name="sante_label_age">Age du patient</string>
+    <string name="sante_label_duree">Duree des symptomes</string>
+    <string name="sante_section_symptomes">SYMPTOMES PRESENTS</string>
+    <string name="sante_btn_analyser">ANALYSER LES SYMPTOMES</string>
+    <string name="sante_section_resultat">RESULTAT DU DIAGNOSTIC</string>
+    <string name="sante_section_conseils">CONSEILS</string>
+    <string name="sante_urgence">CONSULTATION URGENTE — Appelez le 15</string>
+    <string name="err_aucun_symptome">Selectionnez au moins un symptome.</string>
+
+    <!-- Symptomes -->
+    <string name="sym_fievre">Fievre</string>
+    <string name="sym_toux">Toux</string>
+    <string name="sym_fatigue">Fatigue</string>
+    <string name="sym_tete">Maux de tete</string>
+    <string name="sym_gorge">Douleur gorge</string>
+    <string name="sym_nausees">Nausees</string>
+    <string name="sym_thorax">Douleur thorax</string>
+    <string name="sym_essoufl">Essoufflement</string>
+    <string name="sym_diarrhee">Diarrhee</string>
+    <string name="sym_frissons">Frissons</string>
+    
+    <string-array name="duree_symptomes">
+        <item>1 jour</item>
+        <item>2 jours</item>
+        <item>3-5 jours</item>
+        <item>1 semaine</item>
+        <item>Plus de 1 semaine</item>
+    </string-array>
+
+    <string-array name="types_blessures">
+        <item>Brûlure</item>
+        <item>Coupure / Lacération</item>
+        <item>Fracture suspectée</item>
+        <item>Entorse / Foulure</item>
+        <item>Contusion / Bleu</item>
+        <item>Morsure / Piqûre</item>
+    </string-array>
+
+    <string-array name="localisation_blessure">
+        <item>Tête / Visage</item>
+        <item>Cou</item>
+        <item>Thorax / Dos</item>
+        <item>Abdomen</item>
+        <item>Bras / Main</item>
+        <item>Jambe / Pied</item>
+    </string-array>
+
+    <!-- Footer -->
+    <string name="footer_proto">Prototype éducatif. Ne remplace pas un expert.</string>
+
+</resources>

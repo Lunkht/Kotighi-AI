@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/bg_button_primary.xml
+     Bouton principal — fond cyan avec coins arrondis
+     Avec selector pour l'etat pressed -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Etat appuye : plus sombre -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#00c9a0"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Etat desactive -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#1e1e2e"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Etat normal -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FF8C00"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+</selector>

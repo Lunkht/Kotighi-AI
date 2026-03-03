@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/bg_button_red.xml
+     Bouton sante — fond rouge/corail -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#e05050"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#1e1e2e"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#ff6b6b"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+</selector>
