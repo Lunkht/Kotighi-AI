@@ -4,11 +4,15 @@ on:
   push:
     branches: [ main, develop ]
     paths:
-      - 'Kotighi-AI/**'
+      - '**.py'
+      - 'requirements.txt'
+      - 'tests/**'
   pull_request:
     branches: [ main, develop ]
     paths:
-      - 'Kotighi-AI/**'
+      - '**.py'
+      - 'requirements.txt'
+      - 'tests/**'
 
 jobs:
   test:
@@ -26,22 +30,19 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd Kotighi-AI
         pip install -r requirements.txt
         
     - name: Train models
       run: |
-        cd Kotighi-AI
         python train_models.py
         
     - name: Run tests
       run: |
-        cd Kotighi-AI
         pytest tests/ -v --cov=. --cov-report=xml
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
-        file: ./Kotighi-AI/coverage.xml
+        file: ./coverage.xml
         flags: backend
         name: kotighi-backend
