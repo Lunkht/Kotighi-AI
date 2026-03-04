@@ -8,3 +8,5 @@ textColor = "#E2E8F0"
 [server]
 headless = true
 enableCORS = false
+enableXsrfProtection = false
+port = 8501
