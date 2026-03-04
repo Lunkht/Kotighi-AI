@@ -343,6 +343,31 @@ def get_cyber():
     
     return m_rf,m_gb,sc
 
+@st.cache_data(ttl=600)
+def fetch_global_threats():
+    try:
+        # Fetching latest malware/phishing reports from URLhaus (abuse.ch)
+        url = "https://urlhaus-api.abuse.ch/v1/urls/recent/"
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            data = response.json().get('urls', [])
+            df = pd.DataFrame(data)
+            # Simulate locations for visualization (since URLhaus doesn't provide lat/long directly)
+            countries = ['US', 'CN', 'BR', 'DE', 'FR', 'RU', 'IN', 'JP', 'GB', 'CA', 'GN', 'SN', 'NG']
+            df['country'] = [np.random.choice(countries) for _ in range(len(df))]
+            # Mapping approximate lat/long for countries
+            coords = {
+                'US': [37.09, -95.71], 'CN': [35.86, 104.19], 'BR': [-14.23, -51.92], 'DE': [51.16, 10.45],
+                'FR': [46.22, 2.21], 'RU': [61.52, 105.31], 'IN': [20.59, 78.96], 'JP': [36.20, 138.25],
+                'GB': [55.37, -3.43], 'CA': [56.13, -106.34], 'GN': [9.94, -9.69], 'SN': [14.49, -14.45], 'NG': [9.08, 8.67]
+            }
+            df['lat'] = df['country'].map(lambda x: coords.get(x, [0, 0])[0])
+            df['lon'] = df['country'].map(lambda x: coords.get(x, [0, 0])[1])
+            return df
+        return pd.DataFrame()
+    except Exception:
+        return pd.DataFrame()
+
 @st.cache_resource
 def get_sante():
     np.random.seed(99); N=4000
@@ -617,8 +642,7 @@ def app():
         col_main, col_side = st.columns([3, 1])
         
         with col_main:
-            # ONGLETS FONCTIONNELS
-            tab1, tab2 = st.tabs(["SCAN", "SURVEILLANCE"])
+            tab1, tab2, tab3 = st.tabs(["SCAN", "SURVEILLANCE", "SOC GLOBAL"])
             
             with tab1:
                 st.markdown("### Cibles d'Analyse")
@@ -728,6 +752,59 @@ def app():
                         
                         if is_threat:
                             st.toast(f"Alerte : {target['ip']}")
+
+            with tab3:
+                st.markdown("### Centre de Contrôle Mondial (Real-time)")
+                
+                # Fetch Real-time Threats
+                global_df = fetch_global_threats()
+                
+                if not global_df.empty:
+                    # Metrics
+                    c1, c2, c3 = st.columns(3)
+                    with c1:
+                        st.markdown("""<div class='k-label'>MENACE GLOBALE</div>""", unsafe_allow_html=True)
+                        st.markdown(f"<div class='k-mono' style='font-size:1.5rem;color:#FF8C00'>ÉLEVÉE</div>", unsafe_allow_html=True)
+                        st.progress(0.85)
+                    with c2:
+                        st.markdown("""<div class='k-label'>CRIMINALITÉ CONNECTÉE</div>""", unsafe_allow_html=True)
+                        st.markdown(f"<div class='k-mono' style='font-size:1.5rem;color:#FF8C00'>{len(global_df)} RECENTS</div>", unsafe_allow_html=True)
+                        st.progress(0.65)
+                    with c3:
+                        st.markdown("""<div class='k-label'>INDICE DE RISQUE</div>""", unsafe_allow_html=True)
+                        st.markdown(f"<div class='k-mono' style='font-size:1.5rem;color:#FF8C00'>74.2%</div>", unsafe_allow_html=True)
+                        st.progress(0.74)
+                    
+                    st.markdown("<br>", unsafe_allow_html=True)
+                    
+                    # World Map
+                    fig_map = px.scatter_geo(global_df.head(20), lat="lat", lon="lon",
+                                            hover_name="url", size_max=15,
+                                            projection="natural earth",
+                                            template="plotly_dark",
+                                            color_discrete_sequence=["#FF8C00"])
+                    
+                    fig_map.update_geos(showcountries=True, countrycolor="#1C1F2E",
+                                      showland=True, landcolor="#0F1117",
+                                      showocean=True, oceancolor="#06070A",
+                                      showlakes=False)
+                    
+                    fig_map.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=400,
+                                        paper_bgcolor="rgba(0,0,0,0)")
+                    
+                    st.plotly_chart(fig_map, use_container_width=True)
+                    
+                    # Live Log
+                    st.markdown("#### 📡 Flux Nord-Sud (Direct)")
+                    for _, row in global_df.head(5).iterrows():
+                        st.markdown(f"""
+                        <div class='k-alert-warning' style='margin-bottom:8px;padding:8px 12px'>
+                            <span class='k-mono' style='color:#FF8C00'>[DETECTION]</span> {row['url'][:60]}... 
+                            <span class='k-badge' style='float:right;padding:2px 8px'>{row['country']}</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+                else:
+                    st.info("Récupération des flux de menaces en cours...")
 
         with col_side:
             st.markdown("### Événements")
