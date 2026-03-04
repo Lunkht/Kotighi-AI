@@ -37,4 +37,4 @@ streamlit-lottie>=0.0.4
 # Rapports PDF
 reportlab>=4.0.0
 lxml>=4.9.0
-requests
+requests>=8.7

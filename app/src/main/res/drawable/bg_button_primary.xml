@@ -6,25 +6,24 @@
 
     <!-- Etat appuye : plus sombre -->
     <item android:state_pressed="true">
-        <shape android:shape="rectangle">
+        <shape android:shape="oval">
             <solid android:color="#00c9a0"/>
-            <corners android:radius="10dp"/>
+
         </shape>
     </item>
 
     <!-- Etat desactive -->
     <item android:state_enabled="false">
-        <shape android:shape="rectangle">
+        <shape android:shape="oval">
             <solid android:color="#1e1e2e"/>
-            <corners android:radius="10dp"/>
         </shape>
     </item>
 
     <!-- Etat normal -->
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="oval">
             <solid android:color="#FF8C00"/>
-            <corners android:radius="10dp"/>
+
         </shape>
     </item>
 
