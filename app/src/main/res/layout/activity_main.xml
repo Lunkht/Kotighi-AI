@@ -82,10 +82,9 @@
                     android:id="@+id/txtRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_badge"
                     android:paddingVertical="2dp"
                     android:text="Analyste"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     android:textColor="@color/accent_cyan"
                     android:fontFamily="monospace"/>
             </LinearLayout>
@@ -93,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tableau de bore"
+                android:text="Tableau de bored"
                 android:textSize="13sp"
                 android:textColor="?attr/android:textColorSecondary"
                 android:letterSpacing="0.15"
